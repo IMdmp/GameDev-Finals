@@ -27,6 +27,10 @@ public class BoardCreatorInspector : Editor {
 			current.GrowArea();
 		if (GUILayout.Button("Shrink Area"))
 			current.ShrinkArea();
+//		if (GUILayout.Button("Add/Move Ally Spaw Point"))
+//			current.MoveOrCreateAllySpawnPoint();
+//		if (GUILayout.Button("Add/Move Enemy Spawn Point"))
+//			current.MoveOrCreateEnemySpawnPoint();
 		if (GUILayout.Button("Save"))
 			current.Save();
 		if (GUILayout.Button("Load"))

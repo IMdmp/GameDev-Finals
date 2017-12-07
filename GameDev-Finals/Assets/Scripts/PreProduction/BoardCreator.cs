@@ -9,6 +9,8 @@ public class BoardCreator : MonoBehaviour {
 	// SerializeField: editable in Unity but not visible to other scripts
 	[SerializeField] GameObject tileViewPrefab;
 	[SerializeField] GameObject tileSelectionIndicatorPrefab;
+	[SerializeField] GameObject allySpawnPointPrefab;
+	[SerializeField] GameObject enemySpawnPointPrefab;
 
 	// max bounds of the board
 	[SerializeField] int width = 10;
@@ -24,6 +26,9 @@ public class BoardCreator : MonoBehaviour {
 
 	// maps from a Point struct to a Tile instance; basically to know if there is a tile in a certain spot/coordinate
 	Dictionary<Point, Tile> tiles = new Dictionary<Point, Tile>();
+
+	SpawnPoint allySpawnPoint;
+	SpawnPoint enemySpawnPoint;
 
 	// Lazy Loading	pattern: checks if the object has been instantiated; if not, instiates it
 	Transform marker
@@ -138,6 +143,30 @@ public class BoardCreator : MonoBehaviour {
 	{
 		ShrinkSingle(pos);
 	}
+
+	// if spawn point exists, move it; else, create one
+//	public void MoveOrCreateAllySpawnPoint(){
+//		if (this.allySpawnPoint != null)
+//			DestroyImmediate (allySpawnPoint);
+//		
+//		Tile t = GetOrCreate(pos);
+//		GameObject instance = Instantiate(allySpawnPointPrefab) as GameObject;
+//		instance.transform.parent = transform;
+//		allySpawnPoint = instance.GetComponent<SpawnPoint>();
+//		allySpawnPoint.Load (pos, "ally", t.height);
+//	}
+//
+//
+//	public void MoveOrCreateEnemySpawnPoint(){
+//		if (this.enemySpawnPoint != null)
+//			DestroyImmediate (enemySpawnPoint);
+//
+//		Tile t = GetOrCreate(pos);
+//		GameObject instance = Instantiate(enemySpawnPointPrefab) as GameObject;
+//		instance.transform.parent = transform;
+//		this.enemySpawnPoint = instance.GetComponent<SpawnPoint>();
+//		enemySpawnPoint.Load (pos, "enemy", t.height);
+//	}
 
 	// moves Tile Selector Indicator to modified Tile (just to see which Tile has been modified)
 	public void UpdateMarker ()
