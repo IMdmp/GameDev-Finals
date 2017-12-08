@@ -52,7 +52,7 @@ public class Panel : MonoBehaviour
 	void Start()
 	{
 		if (CurrentPosition == null && positionList.Count > 0)
-			SetPosition(positionList[0], false);
+			SetPosition(positionList[0], true);
 	}
 
 	public Position this[string name]
@@ -79,7 +79,8 @@ public class Panel : MonoBehaviour
 
 	public Tweener SetPosition(string positionName, bool animated)
 	{
-		Debug.Log(positionName); // LOOOOOOOOOL
+		Debug.Log(positionName);
+		Debug.Log(animated);
 		return SetPosition(this[positionName], animated);
 	}
 
@@ -94,11 +95,13 @@ public class Panel : MonoBehaviour
 
 		if (animated)
 		{
+			Debug.Log("Animated"); 
 			Transition = anchor.MoveToAnchorPosition(p.myAnchor, p.parentAnchor, p.offset);
 			return Transition;
 		}
 		else
 		{
+			Debug.Log("Not animated");
 			anchor.SnapToAnchorPosition(p.myAnchor, p.parentAnchor, p.offset);
 			return null;
 		}
