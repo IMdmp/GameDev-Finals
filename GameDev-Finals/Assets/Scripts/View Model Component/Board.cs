@@ -85,7 +85,7 @@ public class Board : MonoBehaviour {
 			{
 				Tile next = GetTile(t.pos + dirs[i]);
 				if (next == null || next.distance <= t.distance + 1) // did we get a tile? is it going to that tile from this tile shorter than via other tiles?
-					continue; // opposite of "break;"
+					continue; // skip current iteration
 				if (addTile(t, next))
 				{
 					next.distance = t.distance + 1;
@@ -151,18 +151,31 @@ public class Board : MonoBehaviour {
 		}
 	}
 
-	public void CaptureTile(Tile tile, string faction)
+	public void CaptureTile(Tile firstTile, string faction)
 	{
+		List<Tile> capturedTiles = new List<Tile>();
+		capturedTiles.Add(firstTile);
 
-		tile.faction = faction;
-
-		if (faction == "ally")
+		// gets the Tiles from each direction of the currently captured Tile
+		for (int i = 0; i < 4; ++i)
 		{
-			tile.GetComponent<Renderer>().material = allyTerritoryMaterial;
+			Tile next = GetTile(firstTile.pos + dirs[i]);
+			capturedTiles.Add(next);
+
 		}
-		else if (faction == "enemy")
+		for(int i = 0; i < capturedTiles.Count; i++)
 		{
-			tile.GetComponent<Renderer>().material = enemyTerritoryMaterial;
+
+			capturedTiles[i].faction = faction;
+
+			if (faction == "ally")
+			{
+				capturedTiles[i].GetComponent<Renderer>().material = allyTerritoryMaterial;
+			}
+			else if (faction == "enemy")
+			{
+				capturedTiles[i].GetComponent<Renderer>().material = enemyTerritoryMaterial;
+			}
 		}
 	}
 }
