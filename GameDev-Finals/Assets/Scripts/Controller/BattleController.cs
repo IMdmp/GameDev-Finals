@@ -15,6 +15,12 @@ public class BattleController : StateMachine {
 		public LevelData levelData;
 		public Transform tileSelectionIndicator;
 		public Point pos;
+
+		#region remove
+			public GameObject heroPrefab;
+			public Unit currentUnit;
+			public Tile CurrentTile { get { return board.GetTile(pos); } }
+		#endregion
 	#endregion
 
 	#region Unity Methods

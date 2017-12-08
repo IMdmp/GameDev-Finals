@@ -12,11 +12,11 @@ public abstract class BattleState : State {
 
 	#region Variables
 		protected BattleController owner;
-		public CameraRig cameraRig { get { return owner.cameraRig; } }
-		public Board board { get { return owner.board; } }
-		public LevelData levelData { get { return owner.levelData; } }
-		public Transform tileSelectionIndicator { get { return owner.tileSelectionIndicator; } }
-		public Point pos { get { return owner.pos; } set { owner.pos = value; } }
+		public CameraRig CameraRig { get { return owner.cameraRig; } }
+		public Board Board { get { return owner.board; } }
+		public LevelData LevelData { get { return owner.levelData; } }
+		public Transform TileSelectionIndicator { get { return owner.tileSelectionIndicator; } }
+		public Point Pos { get { return owner.pos; } set { owner.pos = value; } }
 	#endregion
 
 	#region Unity Methods
@@ -71,9 +71,9 @@ public abstract class BattleState : State {
 	}
 	protected virtual void SelectTile(Point p)
 	{
-		if (pos == p || !board.tiles.ContainsKey(p))
+		if (Pos == p || !Board.tiles.ContainsKey(p))
 			return;
-		pos = p;
-		tileSelectionIndicator.localPosition = board.tiles[p].center;
+		Pos = p;
+		TileSelectionIndicator.localPosition = Board.tiles[p].center;
 	}
 }

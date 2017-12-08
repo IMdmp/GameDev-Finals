@@ -4,12 +4,13 @@
 */
 using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 
 public class MoveTargetState : BattleState {
 
 
 	#region Variables
+		List<Tile> tiles;
 	#endregion
 
 	#region Unity Methods
@@ -36,8 +37,29 @@ public class MoveTargetState : BattleState {
 
 	#endregion
 
+	public override void Enter()
+	{
+		base.Enter();
+		Movement mover = owner.currentUnit.GetComponent<Movement>();
+		tiles = mover.GetTilesInRange(Board);
+		Board.SelectTiles(tiles);
+	}
+
+	public override void Exit()
+	{
+		base.Exit();
+		Board.DeSelectTiles(tiles);
+		tiles = null;
+	}
+
 	protected override void OnMove(object sender, InfoEventArgs<Point> e)
 	{
-		SelectTile(e.info + pos);
+		SelectTile(e.info + Pos);
+	}
+
+	protected override void OnFire(object sender, InfoEventArgs<int> e)
+	{
+		if (tiles.Contains(owner.CurrentTile))
+			owner.ChangeState<MoveSequenceState>();
 	}
 }

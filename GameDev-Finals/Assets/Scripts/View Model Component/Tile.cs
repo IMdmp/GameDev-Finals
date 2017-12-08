@@ -1,16 +1,22 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Tile : MonoBehaviour {
 
-	public const float stepHeight = 0.25f;
-	public Point pos;
-	public int height;
+	#region Variables
+		public GameObject content;
+		public const float stepHeight = 0.25f;
+		public Point pos;
+		public int height;
 
-	// to put character in the center on top of the tile
-	public Vector3 center { get { return new Vector3(pos.x, height * stepHeight, pos.y); }}
+		
+		[HideInInspector] public Tile prev; // stores the previous Tile that was passed/traversed to reach this Tile
+		[HideInInspector] public int distance; // stores the number of Tiles crossed to reach this point/Tile
 
+		// to put character in the center on top of the tile
+		public Vector3 center { get { return new Vector3(pos.x, height * stepHeight, pos.y); }}
+	#endregion
 	// visually match the height of the tile
 	void Match ()
 	{
