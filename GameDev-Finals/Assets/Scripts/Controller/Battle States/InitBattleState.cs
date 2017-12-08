@@ -64,18 +64,25 @@ public class InitBattleState : BattleState {
 	}
 	void SpawnTestUnits()
 	{
-		System.Type[] components = new System.Type[] { typeof(WalkMovement), typeof(FlyMovement), typeof(TeleportMovement) };
-		for (int i = 0; i < 3; ++i)
-		{
-			GameObject instance = Instantiate(owner.heroPrefab) as GameObject;
-			Point p = new Point((int)LevelData.tiles[i].x, (int)LevelData.tiles[i].z);
-			Unit unit = instance.GetComponent<Unit>();
-			unit.Place(Board.GetTile(p));
-			unit.Match();
-			Movement m = instance.AddComponent(components[i]) as Movement;
-			m.range = 5;
-			m.jumpHeight = 1;
-		}
+		//System.Type[] components = new System.Type[] { typeof(WalkMovement), typeof(FlyMovement), typeof(TeleportMovement) };
+		GameObject allyInstance = Instantiate(owner.heroPrefab) as GameObject;
+		Point allyStartingPoint = new Point((int)LevelData.tiles[0].x, (int)LevelData.tiles[0].z);
+		Unit ally = allyInstance.GetComponent<Unit>();
+		ally.Place(Board.GetTile(allyStartingPoint));
+		ally.Match();
+		Movement allyMovement = allyInstance.AddComponent(typeof(TeleportMovement)) as Movement;
+		allyMovement.range = 5;
+		allyMovement.jumpHeight = 1;
+
+		GameObject enemyInstance = Instantiate(owner.enemyPrefab) as GameObject;
+		Point enemyStartingPoint = new Point((int)LevelData.tiles[99].x, (int)LevelData.tiles[99].z);
+		Unit enemy = enemyInstance.GetComponent<Unit>();
+		enemy.Place(Board.GetTile(enemyStartingPoint));
+		enemy.Match();
+		Movement enemyMovement = enemyInstance.AddComponent(typeof(TeleportMovement)) as Movement;
+		enemyMovement.range = 5;
+		enemyMovement.jumpHeight = 1;
+
 	}
 #endregion
 }

@@ -9,7 +9,7 @@ public class Tile : MonoBehaviour {
 		public const float stepHeight = 0.25f;
 		public Point pos;
 		public int height;
-
+		public string faction = "none";
 		
 		[HideInInspector] public Tile prev; // stores the previous Tile that was passed/traversed to reach this Tile
 		[HideInInspector] public int distance; // stores the number of Tiles crossed to reach this point/Tile

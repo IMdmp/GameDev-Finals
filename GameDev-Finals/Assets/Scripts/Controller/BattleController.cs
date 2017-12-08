@@ -18,6 +18,7 @@ public class BattleController : StateMachine {
 
 		#region remove
 			public GameObject heroPrefab;
+			public GameObject enemyPrefab;
 			public Unit currentUnit;
 			public Tile CurrentTile { get { return board.GetTile(pos); } }
 		#endregion
