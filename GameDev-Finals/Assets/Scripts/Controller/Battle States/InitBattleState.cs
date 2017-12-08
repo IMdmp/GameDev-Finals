@@ -60,7 +60,7 @@ public class InitBattleState : BattleState {
 		SelectTile(p);
 		SpawnTestUnits(); // This is new
 		yield return null;
-		owner.ChangeState<SelectUnitState>(); // This is changed
+		owner.ChangeState<CutSceneState>(); // This is changed
 	}
 	void SpawnTestUnits()
 	{
