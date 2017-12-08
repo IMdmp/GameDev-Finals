@@ -4,12 +4,14 @@
 */
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 
-public class MoveSequenceState : BattleState {
-
+public class CaptureAreaState : BattleState
+{
 
 	#region Variables
+		List<Tile> tiles;
 	#endregion
 
 	#region Unity Methods
@@ -36,17 +38,20 @@ public class MoveSequenceState : BattleState {
 
 	#endregion
 
+
 	public override void Enter()
 	{
 		base.Enter();
-		StartCoroutine("Sequence");
+		StartCoroutine("Capture");
 	}
 
-	IEnumerator Sequence()
+	public void Capture()
 	{
-		Movement m = owner.currentUnit.GetComponent<Movement>();
-		yield return StartCoroutine(m.Traverse(owner.CurrentTile));
-		Board.CaptureTile(owner.CurrentTile, owner.currentUnit.faction);
+		for (int i = 0; i < 4; ++i)
+		{
+		}
+		
 		owner.ChangeState<SelectUnitState>();
 	}
+
 }

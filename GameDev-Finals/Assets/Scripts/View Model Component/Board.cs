@@ -23,6 +23,10 @@ public class Board : MonoBehaviour {
 
 		Color selectedTileColor = new Color(0, 1, 1, 1);
 		Color defaultTileColor = new Color(1, 1, 1, 1);
+		Color prevTileColor;
+
+		public Material allyTerritoryMaterial;
+		public Material enemyTerritoryMaterial;
 	#endregion
 
 	#region Unity Methods
@@ -130,6 +134,35 @@ public class Board : MonoBehaviour {
 	public void DeSelectTiles(List<Tile> tiles)
 	{
 		for (int i = tiles.Count - 1; i >= 0; --i)
-			tiles[i].GetComponent<Renderer>().material.SetColor("_Color", defaultTileColor);
+		{
+			if (tiles[i].faction == "ally")
+			{
+				tiles[i].GetComponent<Renderer>().material = allyTerritoryMaterial;
+			}
+			else if (tiles[i].faction == "enemy")
+			{
+				tiles[i].GetComponent<Renderer>().material = enemyTerritoryMaterial;
+			}
+			else
+			{
+				tiles[i].GetComponent<Renderer>().material.SetColor("_Color", defaultTileColor);
+			}
+
+		}
+	}
+
+	public void CaptureTile(Tile tile, string faction)
+	{
+
+		tile.faction = faction;
+
+		if (faction == "ally")
+		{
+			tile.GetComponent<Renderer>().material = allyTerritoryMaterial;
+		}
+		else if (faction == "enemy")
+		{
+			tile.GetComponent<Renderer>().material = enemyTerritoryMaterial;
+		}
 	}
 }

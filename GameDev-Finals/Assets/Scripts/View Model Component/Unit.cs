@@ -13,6 +13,7 @@ public class Unit : MonoBehaviour {
 	#region Variables
 		public Tile tile { get; protected set; }
 		public Directions dir;
+		public string faction;
 	#endregion
 
 	public void Place(Tile target)

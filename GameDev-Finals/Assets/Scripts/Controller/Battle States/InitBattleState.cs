@@ -68,6 +68,7 @@ public class InitBattleState : BattleState {
 		GameObject allyInstance = Instantiate(owner.heroPrefab) as GameObject;
 		Point allyStartingPoint = new Point((int)LevelData.tiles[0].x, (int)LevelData.tiles[0].z);
 		Unit ally = allyInstance.GetComponent<Unit>();
+		ally.faction = "ally";
 		ally.Place(Board.GetTile(allyStartingPoint));
 		ally.Match();
 		Movement allyMovement = allyInstance.AddComponent(typeof(TeleportMovement)) as Movement;
@@ -77,6 +78,7 @@ public class InitBattleState : BattleState {
 		GameObject enemyInstance = Instantiate(owner.enemyPrefab) as GameObject;
 		Point enemyStartingPoint = new Point((int)LevelData.tiles[99].x, (int)LevelData.tiles[99].z);
 		Unit enemy = enemyInstance.GetComponent<Unit>();
+		enemy.faction = "enemy";
 		enemy.Place(Board.GetTile(enemyStartingPoint));
 		enemy.Match();
 		Movement enemyMovement = enemyInstance.AddComponent(typeof(TeleportMovement)) as Movement;

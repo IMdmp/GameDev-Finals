@@ -376,6 +376,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePrefab: {fileID: 1665461655332950, guid: 6a58bcdbaa9a48c4cbd7bb0b2fc9e87c, type: 2}
+  allyTerritoryMaterial: {fileID: 2100000, guid: 5cf57faad01345a43b42b9cf650d1696,
+    type: 2}
+  enemyTerritoryMaterial: {fileID: 2100000, guid: 792f15629c16fc14181f13c5f1ba706b,
+    type: 2}
 --- !u!4 &1447151509
 Transform:
   m_ObjectHideFlags: 0

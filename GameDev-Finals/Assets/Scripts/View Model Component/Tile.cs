@@ -47,6 +47,11 @@ public class Tile : MonoBehaviour {
 		Load (new Point((int)v.x, (int)v.z), (int)v.y);
 	}
 
+	public void GetCaptured(string faction)
+	{
+		
+	}
+
 	// Use this for initialization
 	void Start () {
 		
