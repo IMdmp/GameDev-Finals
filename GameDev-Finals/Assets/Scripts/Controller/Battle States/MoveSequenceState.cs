@@ -2,7 +2,7 @@
 * Copyright (c) jmkhilario
 * https://github.com/littlebassistjm
 */
-using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 
@@ -10,6 +10,8 @@ public class MoveSequenceState : BattleState {
 
 
 	#region Variables
+	int dominance;
+	Unit winner;
 	#endregion
 
 	#region Unity Methods
@@ -46,7 +48,15 @@ public class MoveSequenceState : BattleState {
 	{
 		Movement m = owner.turn.actor.GetComponent<Movement>();
 		yield return StartCoroutine(m.Traverse(owner.CurrentTile));
-		Board.CaptureTile(owner.CurrentTile, owner.turn.actor.faction);
+		dominance = Board.CaptureTile(owner.CurrentTile, owner.turn.actor.faction);
+
+		if (dominance >= 70)
+		{
+			string winner = Board.GetVictor();
+			// go to VictoryState; pass winner
+			SceneManager.LoadScene("VictoryScene");
+		}
+
 		turn.hasUnitMoved = true;
 		owner.ChangeState<SelectUnitState>();
 	}

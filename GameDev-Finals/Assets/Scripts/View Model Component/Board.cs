@@ -27,6 +27,8 @@ public class Board : MonoBehaviour {
 
 		public Material allyTerritoryMaterial;
 		public Material enemyTerritoryMaterial;
+
+		private int allyDominance=0, enemyDominance=0;
 	#endregion
 
 	#region Unity Methods
@@ -151,7 +153,7 @@ public class Board : MonoBehaviour {
 		}
 	}
 
-	public void CaptureTile(Tile firstTile, string faction)
+	public int CaptureTile(Tile firstTile, string faction)
 	{
 		List<Tile> capturedTiles = new List<Tile>();
 		capturedTiles.Add(firstTile);
@@ -167,16 +169,41 @@ public class Board : MonoBehaviour {
 		{
 			if (capturedTiles[i] != null)
 			{
-				capturedTiles[i].faction = faction;
+				//capturedTiles[i].faction = faction; <---------------------------------------
 				if (faction == "ally")
 				{
+					if (capturedTiles[i].faction == "ally") { } // do nothing with dominance
+					else if (capturedTiles[i].faction == "enemy") // if originally enemy, subtract enemy dominance
+					{
+						allyDominance++;
+						enemyDominance--;
+					}
+					else allyDominance++;
+
+					capturedTiles[i].faction = faction;
 					capturedTiles[i].GetComponent<Renderer>().material = allyTerritoryMaterial;
 				}
 				else if (faction == "enemy")
 				{
+					if (capturedTiles[i].faction == "enemy") { } // do nothing with dominance
+					else if (capturedTiles[i].faction == "ally") // if originally enemy, subtract enemy dominance
+					{
+						allyDominance--;
+						enemyDominance++;
+					}
+					else enemyDominance++;
+
+					capturedTiles[i].faction = faction;
 					capturedTiles[i].GetComponent<Renderer>().material = enemyTerritoryMaterial;
-				} 
+				}
 			}
 		}
+
+		return allyDominance>enemyDominance? allyDominance : enemyDominance;
+	}
+
+	public String GetVictor()
+	{
+		return allyDominance > enemyDominance ? "ally" : "enemy";
 	}
 }
