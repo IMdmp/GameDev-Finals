@@ -3,7 +3,7 @@
 * https://github.com/littlebassistjm
 */
 using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 
 public class BattleController : StateMachine {
@@ -16,10 +16,13 @@ public class BattleController : StateMachine {
 		public Transform tileSelectionIndicator;
 		public Point pos;
 
-		#region remove
-			public GameObject heroPrefab;
+		public Turn turn = new Turn();
+		public List<Unit> units = new List<Unit>();
+
+	#region remove
+	public GameObject heroPrefab;
 			public GameObject enemyPrefab;
-			public Unit currentUnit;
+			//public Unit currentUnit;
 			public Tile CurrentTile { get { return board.GetTile(pos); } }
 		#endregion
 	#endregion

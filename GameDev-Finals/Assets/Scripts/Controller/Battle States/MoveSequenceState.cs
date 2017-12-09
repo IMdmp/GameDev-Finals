@@ -44,9 +44,10 @@ public class MoveSequenceState : BattleState {
 
 	IEnumerator Sequence()
 	{
-		Movement m = owner.currentUnit.GetComponent<Movement>();
+		Movement m = owner.turn.actor.GetComponent<Movement>();
 		yield return StartCoroutine(m.Traverse(owner.CurrentTile));
-		Board.CaptureTile(owner.CurrentTile, owner.currentUnit.faction);
+		Board.CaptureTile(owner.CurrentTile, owner.turn.actor.faction);
+		turn.hasUnitMoved = true;
 		owner.ChangeState<SelectUnitState>();
 	}
 }

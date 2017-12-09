@@ -75,6 +75,8 @@ public class InitBattleState : BattleState {
 		allyMovement.range = 5;
 		allyMovement.jumpHeight = 1;
 
+		units.Add(ally);
+
 		GameObject enemyInstance = Instantiate(owner.enemyPrefab) as GameObject;
 		Point enemyStartingPoint = new Point((int)LevelData.tiles[99].x, (int)LevelData.tiles[99].z);
 		Unit enemy = enemyInstance.GetComponent<Unit>();
@@ -85,6 +87,7 @@ public class InitBattleState : BattleState {
 		enemyMovement.range = 5;
 		enemyMovement.jumpHeight = 1;
 
+		units.Add(enemy);
 	}
 #endregion
 }

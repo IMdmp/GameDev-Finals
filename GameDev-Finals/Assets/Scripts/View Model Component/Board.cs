@@ -165,16 +165,17 @@ public class Board : MonoBehaviour {
 		}
 		for(int i = 0; i < capturedTiles.Count; i++)
 		{
-
-			capturedTiles[i].faction = faction;
-
-			if (faction == "ally")
+			if (capturedTiles[i] != null)
 			{
-				capturedTiles[i].GetComponent<Renderer>().material = allyTerritoryMaterial;
-			}
-			else if (faction == "enemy")
-			{
-				capturedTiles[i].GetComponent<Renderer>().material = enemyTerritoryMaterial;
+				capturedTiles[i].faction = faction;
+				if (faction == "ally")
+				{
+					capturedTiles[i].GetComponent<Renderer>().material = allyTerritoryMaterial;
+				}
+				else if (faction == "enemy")
+				{
+					capturedTiles[i].GetComponent<Renderer>().material = enemyTerritoryMaterial;
+				} 
 			}
 		}
 	}

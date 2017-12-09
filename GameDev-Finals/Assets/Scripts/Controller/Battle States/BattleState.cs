@@ -3,7 +3,7 @@
 * https://github.com/littlebassistjm
 */
 using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 
 
@@ -17,6 +17,8 @@ public abstract class BattleState : State {
 		public LevelData LevelData { get { return owner.levelData; } }
 		public Transform TileSelectionIndicator { get { return owner.tileSelectionIndicator; } }
 		public Point Pos { get { return owner.pos; } set { owner.pos = value; } }
+		public Turn turn { get { return owner.turn; } }
+		public List<Unit> units { get { return owner.units; } }
 	#endregion
 
 	#region Unity Methods
